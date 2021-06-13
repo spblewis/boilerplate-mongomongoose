@@ -8,10 +8,14 @@ const personSchema = new mongoose.Schema({
   favoriteFoods: { type: [ String ], default: undefined }
 });
 
-let Person = mongoose.model('Person', personSchema);
+const Person = mongoose.model('Person', personSchema);
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  const bilboBaggins = new Person({name: "Bilbo Baggins", age: 144, favoriteFoods: ["bread", "cheese", "bacon", "mushrooms", "mince-pies", "cakes", "blackberries", "good deep mugs of beer"]})
+  bilboBaggins.save((err, data) => {
+    if (err) return console.error(err);
+    done(null, data);
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
